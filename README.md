@@ -37,3 +37,8 @@ curl -LO https://cdimage.ubuntu.com/releases/24.04/release/ubuntu-24.04.4-live-s
 brew install ansible
 ansible --version
 ```
+
+```bash
+brew install hashicorp/tap/terraform
+terraform --version
+```
