@@ -1,0 +1,21 @@
+---
+- name: Base setup for Linux servers
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Update apt cache and upgrade packages
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: "yes"
+
+    - name: Install admin tools
+      ansible.builtin.apt:
+        name:
+          - curl
+          - git
+          - htop
+          - vim
+          - unzip
+          - net-tools
+        state: present
