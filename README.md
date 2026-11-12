@@ -219,3 +219,58 @@ ansible-playbook playbooks/setup.yml -K
 |---|---|
 | First | `changed=2` |
 | Second | `changed=0` (nothing left to change) |
+
+## 11. Install Docker on app01
+
+Create `ansible/playbooks/docker.yml`:
+
+```yaml
+---
+- name: Install Docker on app servers
+  hosts: app
+  become: true
+
+  tasks:
+    - name: Install Docker and Docker Compose
+      ansible.builtin.apt:
+        name:
+          - docker.io
+          - docker-compose-v2
+        state: present
+        update_cache: true
+
+    - name: Start Docker and enable on boot
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Let the login user run Docker without sudo
+      ansible.builtin.user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: true
+```
+
+Run it:
+
+```bash
+cd ansible
+ansible-playbook playbooks/docker.yml -K
+```
+
+Reboot app01 so the group change applies:
+
+```bash
+ssh <username>@<app01-ip>
+sudo reboot
+```
+
+Test:
+
+```bash
+ssh <username>@<app01-ip>
+docker run hello-world
+```
+
+Expected output: `Hello from Docker!`
