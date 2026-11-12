@@ -11,3 +11,15 @@ git branch -M main
 git remote add origin <your-repo-url>
 git push -u origin main
 ```
+
+## 2. VirtualBox network
+
+```bash
+VBoxManage hostonlynet add --name=HostNetwork --netmask=255.255.255.0 --lower-ip=192.168.56.1 --upper-ip=192.168.56.199 --enable
+```
+
+| Host | IP |
+|---|---|
+| Mac | 192.168.56.1 |
+| app01 | 192.168.56.11 |
+| monitor01 | 192.168.56.12 |
