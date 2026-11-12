@@ -132,3 +132,21 @@ hostname
 ```
 
 Expected output: `app01`
+
+## 8. SSH key login
+
+On the Mac, create a key and copy it to app01:
+
+```bash
+ssh-keygen -t ed25519 -C "infrastructure-lab" -f ~/.ssh/id_ed25519 -N ""
+ssh-copy-id -i ~/.ssh/id_ed25519.pub <username>@<app01-ip>
+```
+
+Log in without a password:
+
+```bash
+ssh <username>@<app01-ip>
+hostname
+```
+
+Expected output: `app01`
