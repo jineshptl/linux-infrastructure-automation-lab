@@ -42,3 +42,18 @@ ansible --version
 brew install hashicorp/tap/terraform
 terraform --version
 ```
+
+## 5. Create app01 VM
+
+Open VirtualBox > **New**, then set:
+
+| Setting | Value |
+|---|---|
+| VM Name | app01 |
+| ISO Image | ubuntu-24.04.4-live-server-arm64.iso |
+| Unattended install | User Name `jinesh`, Host Name `app01`, Domain `lab.local` |
+| Memory | 2048 MB |
+| CPUs | 2 |
+| Disk | 20 GB |
+
+Click **Finish**. Ubuntu installs automatically (10-20 minutes) and ends at the `app01 login:` prompt.
