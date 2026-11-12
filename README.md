@@ -23,3 +23,10 @@ VBoxManage hostonlynet add --name=HostNetwork --netmask=255.255.255.0 --lower-ip
 | Mac | 192.168.56.1 |
 | app01 | 192.168.56.11 |
 | monitor01 | 192.168.56.12 |
+
+## 3. Ubuntu Server ISO (ARM64)
+
+```bash
+cd ~/Downloads
+curl -LO https://cdimage.ubuntu.com/releases/24.04/release/ubuntu-24.04.4-live-server-arm64.iso
+```
