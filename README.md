@@ -30,3 +30,10 @@ VBoxManage hostonlynet add --name=HostNetwork --netmask=255.255.255.0 --lower-ip
 cd ~/Downloads
 curl -LO https://cdimage.ubuntu.com/releases/24.04/release/ubuntu-24.04.4-live-server-arm64.iso
 ```
+
+## 4. Automation tools (macOS)
+
+```bash
+brew install ansible
+ansible --version
+```
