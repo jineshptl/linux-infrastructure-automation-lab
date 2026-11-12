@@ -150,3 +150,32 @@ hostname
 ```
 
 Expected output: `app01`
+
+## 9. Ansible connection test
+
+Create `ansible/inventory.ini`:
+
+```ini
+[app]
+app01 ansible_host=<app01-ip>
+
+[all:vars]
+ansible_user=<username>
+ansible_python_interpreter=/usr/bin/python3
+```
+
+Create `ansible/ansible.cfg`:
+
+```ini
+[defaults]
+inventory = inventory.ini
+```
+
+Test:
+
+```bash
+cd ansible
+ansible all -m ping
+```
+
+Expected output: `"ping": "pong"`
