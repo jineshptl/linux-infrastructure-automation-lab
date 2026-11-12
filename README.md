@@ -57,3 +57,30 @@ Open VirtualBox > **New**, then set:
 | Disk | 20 GB |
 
 Click **Finish**. Ubuntu installs automatically (10-20 minutes) and ends at the `app01 login:` prompt.
+
+## 6. Add host-only network to app01
+
+Shut down the VM:
+
+```bash
+sudo shutdown now
+```
+
+VirtualBox > app01 > **Settings** > **Network** > **Adapter 2**:
+
+| Setting | Value |
+|---|---|
+| Enable Network Adapter | Yes |
+| Attached to | Host-only Network |
+| Name | HostNetwork |
+
+Start app01 and check the new interface:
+
+```bash
+ip a
+```
+
+| Interface | Network | IP |
+|---|---|---|
+| enp0s8 | NAT (internet) | 10.0.2.15 |
+| enp0s9 | HostNetwork | none yet |
