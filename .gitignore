@@ -15,3 +15,7 @@ id_rsa
 
 # macOS
 .DS_Store
+
+# SSH keys
+id_*
+*.pub
