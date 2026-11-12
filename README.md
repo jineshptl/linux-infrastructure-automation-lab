@@ -179,3 +179,43 @@ ansible all -m ping
 ```
 
 Expected output: `"ping": "pong"`
+
+## 10. First playbook: base setup
+
+Create `ansible/playbooks/setup.yml`:
+
+```yaml
+---
+- name: Base setup for Linux servers
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Update apt cache and upgrade packages
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: "yes"
+
+    - name: Install admin tools
+      ansible.builtin.apt:
+        name:
+          - curl
+          - git
+          - htop
+          - vim
+          - unzip
+          - net-tools
+        state: present
+```
+
+Run it (`-K` asks for the sudo password):
+
+```bash
+cd ansible
+ansible-playbook playbooks/setup.yml -K
+```
+
+| Run | Expected result |
+|---|---|
+| First | `changed=2` |
+| Second | `changed=0` (nothing left to change) |
