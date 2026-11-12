@@ -84,3 +84,51 @@ ip a
 |---|---|---|
 | enp0s8 | NAT (internet) | 10.0.2.15 |
 | enp0s9 | HostNetwork | none yet |
+
+## 7. Static IP and SSH for app01
+
+Inside app01, create the network file:
+
+```bash
+sudo nano /etc/netplan/60-hostonly.yaml
+```
+
+```yaml
+network:
+  version: 2
+  ethernets:
+    enp0s9:
+      addresses: [<app01-ip>/24]
+```
+
+Apply it:
+
+```bash
+sudo chmod 600 /etc/netplan/60-hostonly.yaml
+sudo netplan apply
+ip a show enp0s9
+```
+
+Install and start SSH:
+
+```bash
+sudo apt update
+sudo apt install -y openssh-server
+sudo systemctl enable --now ssh
+systemctl status ssh
+```
+
+From the Mac, connect:
+
+```bash
+ping -c 2 <app01-ip>
+ssh <username>@<app01-ip>
+```
+
+Confirm you are on the right VM:
+
+```bash
+hostname
+```
+
+Expected output: `app01`
