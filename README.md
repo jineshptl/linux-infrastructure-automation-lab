@@ -369,3 +369,31 @@ If a server is `UNREACHABLE`, check that the VM is running:
 VBoxManage list runningvms
 VBoxManage startvm <vm-name> --type headless
 ```
+
+## 14. Monitoring with Prometheus and Grafana
+
+Install Node Exporter on all servers and Docker on monitor01:
+
+```bash
+cd ansible
+ansible-playbook playbooks/node_exporter.yml -K
+ansible-playbook playbooks/docker.yml -K
+```
+
+Deploy Prometheus and Grafana (config files are in `monitoring/`):
+
+```bash
+ansible-playbook playbooks/monitoring.yml -K
+```
+
+| Service | URL |
+|---|---|
+| Prometheus targets | http://<monitor01-ip>:9090/targets |
+| Grafana | http://<monitor01-ip>:3000 |
+
+Grafana login: `admin` / `admin` (change on first login).
+
+Import dashboard: **Dashboards > New > Import > `1860` > Load > Import**
+
+![Grafana dashboard](docs/screenshots/grafana-dashboard.png)
+![Prometheus targets](docs/screenshots/prometheus-targets.png)
