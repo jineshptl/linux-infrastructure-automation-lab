@@ -1,6 +1,6 @@
 ---
 - name: Install Docker on app servers
-  hosts: app
+  hosts: app:monitoring
   become: true
 
   tasks:
