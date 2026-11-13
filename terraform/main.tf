@@ -17,7 +17,8 @@ resource "docker_image" "nginx" {
 }
 
 resource "docker_container" "web" {
-  name  = "infrastructure-lab-web"
+  name    = "infrastructure-lab-web"
+  restart = "unless-stopped"
   image = docker_image.nginx.image_id
 
   ports {
