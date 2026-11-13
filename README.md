@@ -396,4 +396,5 @@ Grafana login: `admin` / `admin` (change on first login).
 Import dashboard: **Dashboards > New > Import > `1860` > Load > Import**
 
 ![Grafana dashboard](docs/screenshots/grafana-dashboard.png)
+
 ![Prometheus targets](docs/screenshots/prometheus-targets.png)
