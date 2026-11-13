@@ -328,3 +328,44 @@ curl http://<app01-ip>:8080
 ```
 
 Expected output: `Welcome to nginx!`
+
+## 13. Add monitor01
+
+Create monitor01 the same way as app01 (Sections 5-8) with these changes:
+
+| Setting | Value |
+|---|---|
+| VM Name / Host Name | monitor01 |
+| Memory | 3072 MB |
+| Static IP | <monitor01-ip> |
+
+Add it to `ansible/inventory.ini`:
+
+```ini
+[app]
+app01 ansible_host=<app01-ip>
+
+[monitoring]
+monitor01 ansible_host=<monitor01-ip>
+
+[all:vars]
+ansible_user=<username>
+ansible_python_interpreter=/usr/bin/python3
+```
+
+Test both servers and run the base setup:
+
+```bash
+cd ansible
+ansible all -m ping
+ansible-playbook playbooks/setup.yml -K
+```
+
+Expected: `pong` from both servers.
+
+If a server is `UNREACHABLE`, check that the VM is running:
+
+```bash
+VBoxManage list runningvms
+VBoxManage startvm <vm-name> --type headless
+```
