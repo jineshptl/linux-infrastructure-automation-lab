@@ -1,0 +1,26 @@
+---
+- name: Deploy Prometheus and Grafana
+  hosts: monitoring
+  become: true
+
+  tasks:
+    - name: Create monitoring folder
+      ansible.builtin.file:
+        path: /opt/monitoring
+        state: directory
+        mode: "0755"
+
+    - name: Copy monitoring config files
+      ansible.builtin.copy:
+        src: "{{ playbook_dir }}/../../monitoring/{{ item }}"
+        dest: /opt/monitoring/{{ item }}
+        mode: "0644"
+      loop:
+        - prometheus.yml
+        - grafana-datasource.yml
+        - docker-compose.yml
+
+    - name: Start Prometheus and Grafana
+      ansible.builtin.command:
+        cmd: docker compose up -d
+        chdir: /opt/monitoring
